@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="mainApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理后台</title>
+    <!-- jquery -->
+    <script src="http://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+    <!-- semantic -->
+    <script src="http://cdn.bootcss.com/semantic-ui/2.1.8/semantic.min.js"></script>
+    <link href="http://cdn.bootcss.com/semantic-ui/2.1.8/semantic.min.css" rel="stylesheet">
+    <!-- angular js -->
+    <script src="http://cdn.bootcss.com/angular.js/1.5.0/angular.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.5.0/angular-route.min.js"></script>
+    <!-- datatables -->
+    <link href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <!-- page js -->
+    <script src="./dist/index.js"></script>
+    <script src="./dist/global.js"></script>
+</head>
+
+<body>
+    <!-- menu nav -->
+    <div class="ui secondary pointing menu" ng-controller="headerController">
+        <a class="item" ng-class="{ active: isActive('/')}" href="#/">首页 </a>
+        <a class="item" ng-class="{ active: isActive('/user')}" href="#user">用户管理 </a>
+        <a class="item" ng-class="{ active: isActive('/article')}" href="#article">文章管理 </a>
+        <div class="right menu">
+            <a class="ui item">登出 </a>
+        </div>
+    </div>
+    <div class="ui bottom attached segment" ng-view></div>
+</body>
+
+</html>
