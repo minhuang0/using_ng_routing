@@ -1,0 +1,11 @@
+<div class="ui left demo vertical inverted sidebar labeled icon menu visible" ng-controller="menuController">
+    <a class="item" ng-class="{ active: isActive('/')}" href="#/">
+        <i class="home icon"></i> 首页
+    </a>
+    <a class="item" ng-class="{ active: isActive('/user')}" href="#user">
+        <i class="user icon"></i> 用户管理
+    </a>
+    <a class="item" ng-class="{ active: isActive('/article')}" href="#article">
+        <i class="newspaper icon"></i> 文章管理
+    </a>
+</div>

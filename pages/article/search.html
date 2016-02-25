@@ -1,0 +1,25 @@
+<span>科室:</span>
+<select id="departmentSelect" class="ui search dropdown">
+    <option value=" "></option>
+    <option value="所有科室">所有科室</option>
+    <option ng-repeat="d in departments" value="{{d.value}}">
+        {{d.text}}
+    </option>
+</select>
+<span>发布板块:</span>
+<select id="articleTypeSelect" class="ui search dropdown">
+    <option value=" "></option>
+    <option ng-repeat="d in articleType" value="{{d.value}}">
+        {{d.text}}
+    </option>
+</select>
+<span>状态:</span>
+<select id="articleStatusSelect" class="ui search dropdown">
+    <option value=" "></option>
+    <option ng-repeat="d in articleStatus" value="{{d.value}}">
+        {{d.text}}
+    </option>
+</select>
+<script>
+$(".ui.search.dropdown").dropdown();
+</script>

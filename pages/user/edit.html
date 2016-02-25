@@ -1,0 +1,189 @@
+<script>
+$("#searchDiv").hide();
+</script>
+<a id="id" value={{id}}></a>
+<div class="ui buttons" id="role_id">
+    <button class="ui button levelOne" value="0">普通会员</button>
+    <button class="ui button levelTwo" value="1">实力会员</button>
+    <button class="ui button levelThree" value="2">权威会员</button>
+</div>
+<div class="ui action input">
+    <input type="number" placeholder="输入积分" class='current_score'>
+    <button class="ui button current_score_change_btn">修改积分</button>
+</div>
+<div class="ui divider"></div>
+<div class="ui cards">
+    <div class="card" id="user">
+        <div class="image">
+            <img src="./images/default-icon.png">
+        </div>
+        <div class="content">
+            <div class="header"></div>
+            <div class="description role"><i class="trophy icon"></i></div>
+            <div class="description address"><i class="marker icon"></i></div>
+            <div class="description department"><i class="doctor icon"></i></div>
+        </div>
+        <div class="extra content">
+            <div class="description"><i class="phone icon"></i></div>
+        </div>
+    </div>
+    <div class="card">
+        <table class="ui definition table">
+            <tbody>
+                <tr>
+                    <td class="five wide column">性别</td>
+                    <td class="sex"></td>
+                </tr>
+                <tr>
+                    <td>籍贯</td>
+                    <td class="originalPlace"></td>
+                </tr>
+                <tr>
+                    <td>邮箱</td>
+                    <td class='email'></td>
+                </tr>
+                <tr>
+                    <td>邀请码</td>
+                    <td class="invite_code"></td>
+                </tr>
+                <tr>
+                    <td>出生日期</td>
+                    <td class="born"></td>
+                </tr>
+                <tr>
+                    <td>行政职务</td>
+                    <td class="administrative"></td>
+                </tr>
+                <tr>
+                    <td>技术职务</td>
+                    <td class="technical"></td>
+                </tr>
+                <tr>
+                    <td>所在地区</td>
+                    <td class="originalPlace"></td>
+                </tr>
+                <tr>
+                    <td>身份证号</td>
+                    <td class="national_id"></td>
+                </tr>
+                <tr>
+                    <td>毕业院校</td>
+                    <td class="graduated_college"></td>
+                </tr>
+                <tr>
+                    <td class="five wide column">最高学历</td>
+                    <td class="highest_credential"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card">
+        <table class="ui definition table">
+            <tbody>
+                <tr>
+                    <td>注册时间</td>
+                    <td class="created_at"></td>
+                </tr>
+                <tr>
+                    <td>执业医师证号</td>
+                    <td class="certificate_num"></td>
+                </tr>
+                <tr>
+                    <td>个性签名</td>
+                    <td class="personal_signature"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="ui divider"></div>
+<div class="ui buttons ">
+    <button class="ui button">禁用</button>
+    <div class="or"></div>
+    <button class="ui positive button">激活</button>
+</div>
+<script>
+setTimeout(function() {
+    globalFunction.netWork.ajax({
+        url: globalVariable.servers.url + "/user/detail/" + $("#id").attr('value'),
+        success: addUserData
+    });
+}, 200);
+
+function addUserData(data) {
+    console.log(data);
+    var data = data.data;
+    var address = globalFunction.util.xmlParse(data.hospital);
+
+    $("#user > .image > img").attr('src', data.avatar_img || './images/default-icon.png')
+    $("#user > .content > .header").text(data.name);
+    $("#user > .content > .description.role").append(globalFunction.options.parse.userRole(data.role_id));
+    $("#user > .content > .description.address").append(address.province + "-" + address.city);
+    $("#user > .content > .description.department").append(address.hospital + "-" + data.department);
+    $("#user > .extra > .description").append(data.phone);
+    $(".sex").text(globalFunction.options.parse.gender(data.gender));
+    $(".email").text(data.email);
+    $(".invite_code").text(data.invite_code);
+    $(".born").text(data.born);
+    $('.administrative').text(data.administrative);
+    if (data.original_place) {
+        var originalPlace = globalFunction.util.xmlParse(data.original_place);
+        $(".originalPlace").text(originalPlace.province + "-" + originalPlace.city);
+    }
+    $('.technical').text(data.technical);
+    $('.national_id').text(data.national_id);
+    $('.graduated_college').text(data.graduated_college);
+    $('.highest_credential').text(data.highest_credential);
+    $('.created_at').text(data.created_at);
+    $('.certificate_num').text(data.certificate_num);
+    $('.personal_signature').text(data.personal_signature);
+    setRoleIdClass(data.role_id);
+
+
+    $('.current_score').val(data.current_score);
+}
+
+function setRoleIdClass(role_id) {
+    $('#role_id > button').removeClass('positive');
+    if (role_id === '0') {
+        $('#role_id > .levelOne').addClass('positive');
+    } else if (role_id === '1') {
+        $('#role_id > .levelTwo').addClass('positive');
+    } else if (role_id === '2') {
+        $('#role_id > .levelThree').addClass('positive');
+    }
+}
+
+function changeRoleId(role_id) {
+    globalFunction.netWork.ajax({
+        type: "POST",
+        url: globalVariable.servers.url + "/user/update/" + $("#id").attr('value'),
+        data: {
+            role_id: role_id
+        },
+        success: function() {
+            setRoleIdClass(role_id);
+        }
+    });
+};
+
+function addEvent() {
+    $('.current_score_change_btn').on('click', function() {
+        globalFunction.netWork.ajax({
+            type: "POST",
+            url: globalVariable.servers.url + "/user/update/" + $("#id").attr('value'),
+            data: {
+                current_score: $('.current_score').val()
+            },
+            success: globalFunction.netWork.success
+        });
+    });
+    $($('#role_id')[0].children).each(function(data) {
+        $(this).on('click', function() {
+            changeRoleId($(this).val());
+        });
+    });
+}
+
+addEvent();
+</script>

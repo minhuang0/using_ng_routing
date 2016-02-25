@@ -1,0 +1,48 @@
+<div style="margin-bottom: 10px;">
+    <div class="ui left icon input">
+        <input type="text" placeholder="用户名搜索" id="searchUserName" />
+        <i class="user icon"></i>
+    </div>
+    <div class="ui left icon input">
+        <input type="text" placeholder="手机号码搜索" id="searchPhone" />
+        <i class="phone icon"></i>
+    </div>
+    <span>科室:</span>
+    <select id="departmentSelect" class="ui search dropdown">
+        <option value=" "></option>
+        <option value="所有科室">所有科室</option>
+        <option ng-repeat="d in departments" value="{{d.value}}">
+            {{d.text}}
+        </option>
+    </select>
+    <span>地址:</span>
+    <select id="searchAddressProvince" class="ui search dropdown" ng-change="address.updateCity()" ng-model="address.provinceSelect">
+        <option value=" "></option>
+        <option ng-repeat="p in address.provinces" value="{{p.id}}">
+            {{p.name}}
+        </option>
+    </select>
+    <select id="searchAddressCity" class="ui search dropdown" ng-model="address.citySelect" ng-change="address.updateHospital()">
+        <option value=" "></option>
+        <option ng-repeat="p in address.cityes" value="{{p.id}}">
+            {{p.name}}
+        </option>
+    </select>
+    <select id="searchAddressHospital" class="ui search dropdown" ng-model="address.hospitalSelect">
+        <option value=" "></option>
+        <option ng-repeat="p in address.hospitals" value="{{p.id}}">
+            {{p.name}}
+        </option>
+    </select>
+    <div class="ui button clear">
+        <i class="trash outline icon"></i> 清除地址检索
+    </div>
+</div>
+<script>
+$(".ui.search.dropdown").dropdown();
+$(".ui.button.clear").on('click', function() {
+    $("#searchAddressProvince,#searchAddressHospital,#searchAddressHospital").val('');
+    $("#searchAddressHospital,#searchAddressProvince").trigger('change');
+    $(".dropdown > div.text ").text('');
+});
+</script>

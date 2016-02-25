@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<all>
+    <department>
+        <option value="心内科">心内科</option>
+        <option value="内分泌科">内分泌科</option>
+        <option value="风湿科">风湿科</option>
+        <option value="骨科">骨科</option>
+        <option value="神经科">神经科</option>
+        <option value="肾内科">肾内科</option>
+        <option value="呼吸科">呼吸科</option>
+        <option value="泌尿外科">泌尿外科</option>
+        <option value="骨质疏松">骨质疏松</option>
+        <option value="肝病科">肝病科</option>
+        <option value="普外科">普外科</option>
+        <option value="妇科">妇科</option>
+        <option value="基层医疗">基层医疗</option>
+        <option value="预防医学">预防医学</option>
+    </department>
+
+    <articleType>
+        <option value="0">新闻</option>
+        <option value="1">文献摘要荟萃</option>
+        <option value="2">自学课件</option>
+    </articleType>
+
+    <couresType>
+        <option value="0" name="专家视频">专家视频</option>
+        <option value="1" name="经典会议视频">经典会议视频</option>
+        <option value="99" name="其他">其他</option>
+    </couresType>
+
+    <articleStatus>
+         <option value="0">禁用</option>
+         <option value="1">未发布</option>
+         <option value="3">系统通知(已发布)</option>
+         <option value="4">行业动态(已发布)</option>
+    </articleStatus>
+
+    <articleBanKuai>
+         <option value="3">系统通知(已发布)</option>
+         <option value="4">行业动态(已发布)</option>
+    </articleBanKuai>
+
+    <caseStatus>
+         <option value="0">禁用</option>
+         <option value="3">置顶(已发布)</option>
+         <option value="4">普通(已发布)</option>
+    </caseStatus>
+
+    <questionStatus>
+          <option value="0">禁用</option>
+          <option value="1">未发布</option>
+          <option value="2">已发布</option>
+    </questionStatus>
+
+    <questionnaireType>
+          <option value="0">推送</option>
+          <option value="1">视频</option>
+    </questionnaireType>
+
+    <exchangeStatus>
+          <option value="0">兑换失败</option>
+          <option value="1">待批复</option>
+          <option value="2">兑换成功</option>
+    </exchangeStatus>
+
+    <userRole>
+          <option value="0">普通会员</option>
+          <option value="1">实力会员</option>
+          <option value="2">权威会员</option>
+    </userRole>
+
+    <userStatus>
+          <option value="0">禁用</option>
+          <option value="1">激活</option>
+    </userStatus>
+
+    <gender>
+          <option value="0">女</option>
+          <option value="1">男</option>
+    </gender>
+
+    <isAnswered>
+          <option value="0">未答题</option>
+          <option value="1">已答题</option>
+    </isAnswered>
+
+    <xingZhengOffice>
+        <option value="院长">院长</option>
+        <option value="副院长">副院长</option>
+        <option value="主任">主任</option>
+        <option value="副主任">副主任</option>
+        <option value="科长">科长</option>
+        <option value="副科长">副科长</option>
+        <option value="护士长">护士长</option>
+        <option value="其他">其他</option>
+    </xingZhengOffice>
+
+    <technology>
+        <option value="初级药士">初级药士</option>
+        <option value="初级药师">初级药师</option>
+        <option value="主管药师">主管药师</option>
+        <option value="副主任药师">副主任药师</option>
+        <option value="主任药师">主任药师</option>
+        <option value="助理医师">助理医师</option>
+        <option value="住院医师">住院医师</option>
+        <option value="主治医师">主治医师</option>
+        <option value="副主任医师">副主任医师</option>
+        <option value="主任医师">主任医师</option>
+        <option value="护士">护士</option>
+        <option value="护师">护师</option>
+        <option value="主任护师">主管护师</option>
+        <option value="主管医师">副主任护师</option>
+        <option value="副主任护师">主任护师</option>
+        <option value="其他">其他</option>
+    </technology>
+
+    <diploma>
+        <option value="专科">专科</option>
+        <option value="本科">本科</option>
+        <option value="硕士">硕士</option>
+        <option value="博士">博士</option>
+        <option value="博士后">博士后</option>
+        <option value="教授">教授</option>
+    </diploma>
+
+    <advertisingCType>
+        <option value="0">禁用</option>
+        <option value="1">病例分享</option>
+        <option value="2">行业动态</option>
+        <option value="3">医道课程</option>
+    </advertisingCType>
+
+     <reportStatus>
+          <option value="0">待处理</option>
+          <option value="1">已处理</option>
+    </reportStatus>
+</all>
