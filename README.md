@@ -1,0 +1,1 @@
+学习使用angularjs中的route和ngView特性来写前端。
