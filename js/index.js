@@ -20,11 +20,16 @@ mainApp.config(function($routeProvider) {
 			})
 			.when('/article/edit/:id', {
 				templateUrl: './pages/article/edit.html',
-				controller: 'articleEditController'
+				controller: 'articleController'
 			})
-			.otherwise({
+			.when('/article/show/:id', {
+				templateUrl: './pages/article/show.html',
+				controller: 'articleController'
+			})
+			/*.otherwise({
 				redirectTo: '/'
-			});
+			})*/
+		;
 	})
 	.controller('homeController', function($scope, $route) {
 		$scope.message = 'home pages';
@@ -49,15 +54,18 @@ mainApp.config(function($routeProvider) {
 		};
 		$scope.departments = globalVariable.options.optionsJson.department;
 	})
-	.controller('articleController', function($scope, $route) {
+	.controller('articleController', function($scope, $route, $routeParams) {
 		$scope.articleStatus = globalVariable.options.optionsJson.articleStatus;
 		$scope.departments = globalVariable.options.optionsJson.department;
-		$scope.articleType = globalVariable.options.optionsJson.articleType
+		$scope.articleType = globalVariable.options.optionsJson.articleType;
+		$scope.id = $routeParams.id;
+		if ($routeParams.id == 0) {
+			$scope.operation = "新建文章";
+		} else {
+			$scope.operation = "编辑文章";
+		}
 	})
 	.controller('userEditController', function($scope, $routeParams) {;
-		$scope.id = $routeParams.id;
-	})
-	.controller('articleEditController', function($scope, $routeParams) {;
 		$scope.id = $routeParams.id;
 	})
 	.controller('menuController', function($scope, $location) {

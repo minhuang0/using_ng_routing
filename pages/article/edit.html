@@ -1,1 +1,93 @@
-<h2>article edit pages</h2>
+<a id="id" value={{id}}></a>
+<a href="./index.html#/article/show/{{id}}" id="show"><i class="print big icon"></i></a>
+<div class="ui text container">
+    <div style="text-align: center;">
+        <h2>{{operation}}</h2>
+    </div>
+    <div ng-include="'./pages/article/form.html'"></div>
+</div>
+<script>
+setTimeout(function() {
+    var id = $("#id").attr('value');
+    $('select.dropdown').dropdown();
+    var ckeditor = CKEDITOR.replace('context');
+    $('#converBtnUpload').click(coverUpload);
+    $("#save").on('click', submit);
+    if (id < 1) {
+        $("#show").hide();
+        return;
+    }
+    globalFunction.netWork.ajax({
+        url: globalVariable.servers.url + "/article/detail/" + id,
+        success: addData
+    });
+}, 200);
+
+function coverUpload() {
+    var formData = new FormData();
+    var file = $("#coverFileInput")[0].files[0];
+    if (!file) {
+        alert("请选择图片");
+        return;
+    }
+    formData.append("photo", file);
+    formData.append("from", 'articles');
+    var id = $("#id").attr('value').length == 0 ? 1 : $("#id").attr('value');
+    $.ajax({
+        url: globalVariable.servers.url + "/upload/update/" + id,
+        type: 'POST',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function(data) {
+            $("#img_url").attr("src", globalVariable.servers.url + "/images/articles/" + data.img_url)
+        },
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+}
+
+function addData(data) {
+    $("#title").val(data.title);
+    //$("#released_at").text(data.released_at);
+    $("#author").val(data.author);
+    $("#status").val(data.status);
+    $("#ctype").val(data.ctype);
+    $("#department").val(data.department);
+    $("#description").val(data.description);
+    $("#img_url").attr("src", decodeURIComponent(data.img_url));
+    CKEDITOR.instances['context'].setData(data.context);
+}
+
+function submit() {
+    globalFunction.netWork.ajax({
+        url: $("#id").attr('value') === "0" ? globalVariable.servers.url + "/article/create" :  globalVariable.servers.url + "/article/update/" + $("#id").attr('value'),
+        type: "POST",
+        data: getData(),
+        success: function(data) {
+            console.info(data);
+        }
+    });
+}
+
+function getData() {
+    var timeNow = new Date().toLocaleString().slice(0, 19).replace('下午', ' ').replace('上午', '');
+    var articles = {
+        "title": $("#title").val(),
+        "description": $("#description").val(),
+        "context": CKEDITOR.instances['context'].getData(),
+        "released_at": timeNow,
+        "status": $("#status").val(),
+        "author": $("#author").val(),
+        "img_url": $("#img_url").attr("src"),
+        "department": $("#department").val(),
+        "ctype": $("#ctype").val()
+    };
+    if ($("#id").attr('value') > 0) {
+        article['id'] = $("#id").attr('value');
+    }
+    return articles;
+}
+</script>

@@ -1,0 +1,36 @@
+<a id="id" value={{id}}></a>
+<a href="./index.html#/article/edit/{{id}}"><i class="edit big icon"></i></a>
+<div class="ui text container">
+    <div style="text-align: center;">
+        <i class="huge circular newspaper icon"></i>
+        <h2 id="title"></h2>
+        <p><span id="released_at"></span><span id="author" style="margin-left: 20px"></span></p>
+        <span id="status"></span><span id="department" style="margin-left: 20px"></span>
+        <img class="ui centered medium image" id="img_url">
+    </div>
+    <div class="ui raised segment">
+        <p id="description"></p>
+    </div>
+    <div class="ui piled segment" id="context"></div>
+</div>
+<script>
+setTimeout(function() {
+    globalFunction.netWork.ajax({
+        url: globalVariable.servers.url + "/article/detail/" + $("#id").attr('value'),
+        success: addData
+    });
+}, 200);
+
+
+
+function addData(data) {
+    $("#title").text(data.title);
+    $("#released_at").text(data.released_at);
+    $("#author").text("作者:" + data.author);
+    $("#status").text("类别:" + globalFunction.options.parse.articleStatus(data.status));
+    $("#department").text("科室:" + data.department);
+    $("#description").append(data.description);
+    $("#img_url").attr("src", decodeURIComponent(data.img_url));
+    $("#context").append(data.context);
+}
+</script>

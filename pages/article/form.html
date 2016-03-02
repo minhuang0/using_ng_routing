@@ -1,0 +1,50 @@
+<form class="ui form">
+    <div class="required field">
+        <label>标题</label>
+        <input type="text" name="title" placeholder="标题" id="title" />
+    </div>
+    <div class="field">
+        <label>作者</label>
+        <input type="text" name="author" placeholder="作者" id="author" />
+    </div>
+    <div class="required field">
+        <label>科室</label>
+        <select id="department">
+            <option value="所有科室">所有科室</option>
+            <option ng-repeat="d in departments" value="{{d.value}}">
+                {{d.text}}
+            </option>
+        </select>
+    </div>
+    <div class="required field">
+        <label>状态</label>
+        <select id="status">
+            <option ng-repeat="d in articleStatus" value="{{d.value}}">
+                {{d.text}}
+            </option>
+        </select>
+    </div>
+    <div class="required field">
+        <label>板块</label>
+        <select id="ctype">
+            <option ng-repeat="d in articleType" value="{{d.value}}">
+                {{d.text}}
+            </option>
+        </select>
+    </div>
+    <div class="required field">
+        <label>简介</label>
+        <textarea id="description"></textarea>
+    </div>
+    <div class="required field">
+        <label>封面</label>
+        <input name="coverFileInput" type="file" id="coverFileInput" accept="image/*" />
+        <img id="img_url" class="ui small image" />
+        <input type="button" value="Upload" id="converBtnUpload" />
+    </div>
+    <div class="required field">
+        <label>内容</label>
+        <textarea id="context"></textarea>
+    </div>
+    <button class="ui button" type="submit" id="save">保存</button>
+</form>
